@@ -16,6 +16,7 @@ func main() {
 		Flags: []cli.Flag{
 			&cli.StringFlag{Name: "token_symbol", Value: "ROL", Usage: "token symbol", EnvVars: []string{"TOKEN_SYMBOL"}},
 			&cli.StringFlag{Name: "token_owner", Value: "dQzTM9hXV5MD1fRniOKI3MvPF_-8b2XDLmpfcMN9hi8", Usage: "token owner", EnvVars: []string{"TOKEN_OWNER"}},
+			&cli.StringFlag{Name: "port", Value: ":80", EnvVars: []string{"PORT"}},
 		},
 		Action: run,
 	}
@@ -31,7 +32,7 @@ func run(c *cli.Context) error {
 	signal.Notify(signals, os.Interrupt, syscall.SIGTERM)
 
 	d := detector.New(c.String("token_symbol"), c.String("token_owner"))
-	d.Run(":80")
+	d.Run(c.String("port"))
 
 	<-signals
 	return nil

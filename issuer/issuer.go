@@ -9,7 +9,7 @@ import (
 	"github.com/inconshreveable/log15"
 )
 
-var logger = log15.New(log15.Ctx{"module": "detector"})
+var logger = log15.New(log15.Ctx{"module": "issuer"})
 
 type Issuer struct {
 	Symbol  string

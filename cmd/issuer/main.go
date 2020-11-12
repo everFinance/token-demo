@@ -17,6 +17,7 @@ func main() {
 			&cli.StringFlag{Name: "token_symbol", Value: "ROL", Usage: "token symbol", EnvVars: []string{"TOKEN_SYMBOL"}},
 			&cli.StringFlag{Name: "token_owner", Value: "dQzTM9hXV5MD1fRniOKI3MvPF_-8b2XDLmpfcMN9hi8", Usage: "token owner", EnvVars: []string{"TOKEN_OWNER"}},
 			&cli.StringFlag{Name: "key_path", Value: "./test-keyfile.json", Usage: "ar keyfile path", EnvVars: []string{"KEY_PATH"}},
+			&cli.StringFlag{Name: "port", Value: ":80", EnvVars: []string{"PORT"}},
 		},
 		Action: run,
 	}
@@ -32,7 +33,7 @@ func run(c *cli.Context) error {
 	signal.Notify(signals, os.Interrupt, syscall.SIGTERM)
 
 	i := issuer.New(c.String("token_symbol"), c.String("token_owner"), c.String("key_path"))
-	i.Run(":80")
+	i.Run(c.String("port"))
 
 	<-signals
 	return nil
