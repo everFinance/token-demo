@@ -83,7 +83,7 @@ TOKEN_OWNER={{Token creator address}} \
 KEY_PATH={{Keyfile path}} \
 PORT={{HTTP port}} ./build/issuer
 ```
-eg: ***Note!!! You need to add `:` before the PORT. The correct writing is `:80`, not `80`***
+eg: (***Note!!! You need to add `:` before the PORT. The correct writing is `:80`, not `80`***)
 ```shell
 GIN_MODE=release \
 TOKEN_SYMBOL=ROL \
@@ -115,9 +115,9 @@ PORT=:80 ./build/detector
 Wait for the program to complete sync, use the following command to query the data:
 
 ```shell
-curl'http://127.0.0.1/balanceOf/{{wallet address}}' # Query wallet balance
-curl'http://127.0.0.1/txs/{{wallet address}}' # Query all transactions of the wallet
-curl'http://127.0.0.1/txs' # Query all historical transactions
+curl 'http://127.0.0.1/balanceOf/{{wallet address}}' # Query wallet balance
+curl 'http://127.0.0.1/txs/{{wallet address}}' # Query all transactions of the wallet
+curl 'http://127.0.0.1/txs' # Query all historical transactions
 ```
 
 ## Development
