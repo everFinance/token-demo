@@ -92,6 +92,9 @@ KEY_PATH='./test-keyfile.json' \
 PORT=:80 ./build/issuer
 ```
 3. Click on `Connect Wallet`, use MetaMask for Claim and Transfer
+```
+http://127.0.0.1/token/
+```
 
 ![demo-1](./demo-1.png)
 

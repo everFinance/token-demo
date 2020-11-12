@@ -91,6 +91,9 @@ KEY_PATH='./test-keyfile.json' \
 PORT=:80 ./build/issuer
 ```
 3. 运行结果如下图所示，点击右上角 `Connect Wallet`，使用 MetaMask 进行 Claim 和 Transfer
+```
+http://127.0.0.1/token/
+```
 
 ![demo-1](./demo-1.png)
 
