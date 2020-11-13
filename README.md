@@ -26,8 +26,9 @@ Token issuance program, provide the WEB of Token, and token API.
 - txs: query all transactions
 - submitTx: user signature and submit transaction
 
-#### detectransactions
- transactionstoken detector program automatically loads the data on Arweave after running, and provides an API to query token transactions.
+#### detector
+
+detector program automatically loads the data on Arweave after running, and provide API to query token transactions.
 
 ##### API:
 
