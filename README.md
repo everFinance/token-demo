@@ -2,6 +2,8 @@
 
 [中文](./README_ZH.md)
 
+[demo](http://everwallet.io/token/)
+
 A rollup token issued on Arweave.
 
 - Three-party verification
@@ -11,13 +13,13 @@ A rollup token issued on Arweave.
 
 ## Module
 
-### Application Module
+### Application Modules
 
 #### issuer
 
-Token issuance program, provide the WEB of Token, and token interface.
+Token issuance program, provide the WEB of Token, and token API.
 
-##### Interface:
+##### API:
 
 - balanceOf: query user's balance
 - txsByAddress: query user's transactions
@@ -25,9 +27,9 @@ Token issuance program, provide the WEB of Token, and token interface.
 - submitTx: user signature and submit transaction
 
 #### detectransactions
- transactionstoken detector program automatically loads the data on Arweave after running, and provides an interface to query token transactions.
+ transactionstoken detector program automatically loads the data on Arweave after running, and provides an API to query token transactions.
 
-##### Interface:
+##### API:
 
 - balanceOf: query user's balance
 - txsByAddress: query user's transactions

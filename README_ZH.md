@@ -1,5 +1,7 @@
 # token-demo
 
+[demo](http://everwallet.io/token/)
+
 发行在 Arweave 上的 rollup token。
 
 - 第三方可验证
