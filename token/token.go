@@ -199,9 +199,19 @@ func (t *Token) txVerify(tx Tx) (err error) {
 		return fmt.Errorf("transfer to self: %v", tx.To)
 	}
 
-	// amount is zero
+	// amount verify
 	if tx.Amount == "0" {
 		return fmt.Errorf("amount is zero")
+	}
+	amount, ok := new(big.Int).SetString(tx.Amount, 10)
+	if !ok {
+		return fmt.Errorf("invalid amount: %v", tx.Amount)
+	}
+	if amount.Cmp(big.NewInt(0)) == 0 {
+		return fmt.Errorf("amount is zero")
+	}
+	if amount.Cmp(big.NewInt(1)) < 0 {
+		return fmt.Errorf("negative amount: %v", tx.Amount)
 	}
 
 	// only mint once

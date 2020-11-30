@@ -4,7 +4,7 @@ go 1.15
 
 require (
 	github.com/ethereum/go-ethereum v1.9.23
-	github.com/everFinance/goar v0.0.1
+	github.com/everFinance/goar v0.0.4
 	github.com/gin-gonic/gin v1.6.3
 	github.com/go-co-op/gocron v0.3.3
 	github.com/go-playground/validator/v10 v10.4.1 // indirect

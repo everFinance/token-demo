@@ -11,6 +11,10 @@ A rollup token issued on Arweave.
 - Very cheap
 - Support MetaMask, compatible with Ethereum
 
+## Architecture
+
+![arch](./demo-0.png)
+
 ## Module
 
 ### Application Modules

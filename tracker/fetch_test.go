@@ -17,33 +17,28 @@ func TestMustFetchTxData(t *testing.T) {
 }
 
 func TestMustFetchIds(t *testing.T) {
-	ids := MustFetchIds(`{
-		"op": "and",
-		"expr1": {
-			"op": "equals",
-			"expr1": "TokenSymbol",
-			"expr2": "ROL"
-		},
-		"expr2": {
-			"op": "equals",
-			"expr1": "CreatedBy",
-			"expr2": "dQzTM9hXV5MD1fRniOKI3MvPF_-8b2XDLmpfcMN9hi8"
+	ids := MustFetchIds(`
+	{
+		transactions(
+			first: 10000
+			tags: [
+					{
+							name: "TokenSymbol",
+							values: "ROL"
+					},
+					{
+							name: "CreatedBy",
+							values: "dQzTM9hXV5MD1fRniOKI3MvPF_-8b2XDLmpfcMN9hi8"
+					},
+			]
+			sort: HEIGHT_ASC
+		) {
+			edges {
+				node {
+					id
+				}
+			}
 		}
 	}`, nil)
 	assert.True(t, len(ids) > 0)
-
-	rIds := MustFetchIdsASC(`{
-		"op": "and",
-		"expr1": {
-			"op": "equals",
-			"expr1": "TokenSymbol",
-			"expr2": "ROL"
-		},
-		"expr2": {
-			"op": "equals",
-			"expr1": "CreatedBy",
-			"expr2": "dQzTM9hXV5MD1fRniOKI3MvPF_-8b2XDLmpfcMN9hi8"
-		}
-	}`, nil)
-	assert.Equal(t, len(ids), len(rIds))
 }
