@@ -67,7 +67,7 @@ func MustFetchTxData(id string, c *client.Client) (res []byte) {
 	return
 }
 
-func MustFetchIds(arql string, c *client.Client) (ids []string) {
+func MustFetchIds(query string, c *client.Client) (ids []string) {
 	if c == nil {
 		c = client.New("https://arweave.net")
 	}
@@ -75,23 +75,34 @@ func MustFetchIds(arql string, c *client.Client) (ids []string) {
 	var err error
 
 	for {
-		ids, err = c.Arql(arql)
+		ids, err = fetchIds(query, c)
 		if err == nil {
 			break
 		}
-
-		logger.Warn("fetch ids failed, retry 3 secs", "err", err)
-		time.Sleep(3 * time.Second)
 	}
 
 	return
 }
 
-func MustFetchIdsASC(arql string, c *client.Client) (rIds []string) {
-	ids := MustFetchIds(arql, c)
-
-	for i := len(ids) - 1; i > -1; i-- {
-		rIds = append(rIds, ids[i])
+func fetchIds(query string, c *client.Client) (ids []string, err error) {
+	data, err := c.GraphQL(query)
+	if err != nil {
+		return
 	}
+
+	txs := struct {
+		Transactions struct {
+			Edges []struct{ Node struct{ ID string } }
+		}
+	}{}
+
+	if err = json.Unmarshal(data, &txs); err != nil {
+		return
+	}
+
+	for _, ed := range txs.Transactions.Edges {
+		ids = append(ids, ed.Node.ID)
+	}
+
 	return
 }

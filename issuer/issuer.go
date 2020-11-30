@@ -24,7 +24,7 @@ type Issuer struct {
 }
 
 func New(symbol, owner, keyPath string) *Issuer {
-	wallet, err := wallet.NewFromPath(keyPath)
+	wallet, err := wallet.NewFromPath(keyPath, "https://arweave.net/")
 	if err != nil {
 		panic(err)
 	}

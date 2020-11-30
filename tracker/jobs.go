@@ -24,19 +24,29 @@ func (t *Tracker) jobTxsPull() {
 	}()
 
 	// get all Arweave txs
-	ids := MustFetchIdsASC(`{
-			"op": "and",
-			"expr1": {
-				"op": "equals",
-				"expr1": "TokenSymbol",
-				"expr2": "`+t.symbol+`"
-			},
-			"expr2": {
-				"op": "equals",
-				"expr1": "CreatedBy",
-				"expr2": "`+t.owner+`"
+	ids := MustFetchIds(`
+	{
+		transactions(
+			first: 10000
+			tags: [
+					{
+							name: "TokenSymbol",
+							values: "ROL"
+					},
+					{
+							name: "CreatedBy",
+							values: "dQzTM9hXV5MD1fRniOKI3MvPF_-8b2XDLmpfcMN9hi8"
+					},
+			]
+			sort: HEIGHT_ASC
+		) {
+			edges {
+				node {
+					id
+				}
 			}
-		}`, t.arClient)
+		}
+	}`, t.arClient)
 
 	if len(ids) <= len(t.ids) {
 		return
