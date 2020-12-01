@@ -51,7 +51,7 @@ func (i *Issuer) jobRollup() {
 		},
 	})
 
-	if status != "Pending" {
+	if status != "OK" {
 		logger.Error("submit pendingTxs failed", "id", id, "status", status, "err", err)
 		return
 	}
