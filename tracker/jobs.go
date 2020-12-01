@@ -27,15 +27,15 @@ func (t *Tracker) jobTxsPull() {
 	ids := MustFetchIds(`
 	{
 		transactions(
-			first: 10000
+			first: 100
 			tags: [
 					{
 							name: "TokenSymbol",
-							values: "ROL"
+							values: "`+t.symbol+`"
 					},
 					{
 							name: "CreatedBy",
-							values: "dQzTM9hXV5MD1fRniOKI3MvPF_-8b2XDLmpfcMN9hi8"
+							values: "`+t.owner+`"
 					},
 			]
 			sort: HEIGHT_ASC
