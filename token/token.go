@@ -10,6 +10,7 @@ import (
 	"github.com/ethereum/go-ethereum/accounts"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
+	"github.com/everFinance/goar/types"
 )
 
 const (
@@ -38,6 +39,7 @@ type Tx struct {
 // Token model
 // ExecuteTx from API or Arweave
 type Token struct {
+	Tags   []types.Tag
 	Symbol string
 	Owner  string
 
@@ -50,8 +52,14 @@ type Token struct {
 
 func New(symbol, owner string) *Token {
 	return &Token{
-		Symbol:   symbol,
-		Owner:    owner,
+		Tags: []types.Tag{
+			types.Tag{Name: "App", Value: "radar-token"},
+			types.Tag{Name: "Version", Value: "0.0.1"},
+			types.Tag{Name: "Owner", Value: owner},
+		},
+		Symbol: symbol,
+		Owner:  owner,
+
 		balances: make(map[string]*big.Int),
 		nonces:   make(map[string]int64),
 		minted:   make(map[string]bool),

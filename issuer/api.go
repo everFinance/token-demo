@@ -1,6 +1,7 @@
 package issuer
 
 import (
+	"encoding/json"
 	"net/http"
 
 	"github.com/everFinance/token-demo/cache"
@@ -60,7 +61,7 @@ func (i *Issuer) txs(c *gin.Context) {
 
 func (i *Issuer) submitTx(c *gin.Context) {
 	tx := token.Tx{
-		Owner: i.Owner,
+		Owner: i.token.Owner,
 	}
 	if err := c.ShouldBindJSON(&tx); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -71,6 +72,13 @@ func (i *Issuer) submitTx(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
+
+	txData, err := json.Marshal(tx)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	i.rollup.AddTx() <- txData
 
 	i.cache.AddPendingTx(tx)
 	i.cache.AddTx(cache.TxResponse{

@@ -1,3 +1,5 @@
 build
+bolt
+log_dir
 
 test-keyfile.json
