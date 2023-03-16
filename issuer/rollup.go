@@ -12,7 +12,7 @@ import (
 func (i *Issuer) runRollup() {
 	s := gocron.NewScheduler(time.UTC)
 
-	s.Every(5).Minutes().Do(i.jobRollup)
+	s.Every(1).Minutes().Do(i.jobRollup)
 
 	s.StartAsync()
 }
@@ -36,7 +36,7 @@ func (i *Issuer) jobRollup() {
 		return
 	}
 
-	id, status, err := i.wallet.SendData(pending, []types.Tag{
+	id, err := i.wallet.SendData(pending, []types.Tag{
 		types.Tag{
 			Name:  "TokenSymbol",
 			Value: i.Symbol,
@@ -49,10 +49,11 @@ func (i *Issuer) jobRollup() {
 			Name:  "CreatedBy",
 			Value: i.Owner,
 		},
+		types.Tag{Name: "Content-Type", Value: "application/json"},
 	})
 
-	if status != "OK" {
-		logger.Error("submit pendingTxs failed", "id", id, "status", status, "err", err)
+	if err != nil {
+		logger.Error("submit pendingTxs failed", "id", id, "err", err)
 		return
 	}
 

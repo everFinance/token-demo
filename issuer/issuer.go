@@ -1,7 +1,7 @@
 package issuer
 
 import (
-	"github.com/everFinance/goar/wallet"
+	"github.com/everFinance/goar"
 	"github.com/everFinance/token-demo/cache"
 	"github.com/everFinance/token-demo/token"
 	"github.com/everFinance/token-demo/tracker"
@@ -20,11 +20,11 @@ type Issuer struct {
 	token   *token.Token
 	tracker *tracker.Tracker
 	cache   *cache.Cache
-	wallet  *wallet.Wallet
+	wallet  *goar.Wallet
 }
 
 func New(symbol, owner, keyPath string) *Issuer {
-	wallet, err := wallet.NewFromPath(keyPath, "https://arweave.net/")
+	wallet, err := goar.NewWalletFromPath(keyPath, "https://arweave.net/")
 	if err != nil {
 		panic(err)
 	}

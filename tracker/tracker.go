@@ -1,7 +1,7 @@
 package tracker
 
 import (
-	"github.com/everFinance/goar/client"
+	"github.com/everFinance/goar"
 	"github.com/everFinance/token-demo/token"
 	"github.com/inconshreveable/log15"
 )
@@ -10,7 +10,7 @@ var logger = log15.New(log15.Ctx{"module": "tracker"})
 
 // Tracker transactions from Arweave
 type Tracker struct {
-	arClient    *client.Client
+	arClient    *goar.Client
 	transaction chan token.Tx
 
 	symbol string
@@ -22,7 +22,7 @@ type Tracker struct {
 
 func New(symbol, owner string) *Tracker {
 	return &Tracker{
-		arClient:    client.New("https://arweave.net"),
+		arClient:    goar.NewClient("https://arweave.net"),
 		transaction: make(chan token.Tx),
 
 		symbol: symbol,

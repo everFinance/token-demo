@@ -14,8 +14,8 @@ func main() {
 	app := &cli.App{
 		Name: "detector",
 		Flags: []cli.Flag{
-			&cli.StringFlag{Name: "token_symbol", Value: "ROL2", Usage: "token symbol", EnvVars: []string{"TOKEN_SYMBOL"}},
-			&cli.StringFlag{Name: "token_owner", Value: "dQzTM9hXV5MD1fRniOKI3MvPF_-8b2XDLmpfcMN9hi8", Usage: "token owner", EnvVars: []string{"TOKEN_OWNER"}},
+			&cli.StringFlag{Name: "token_symbol", Value: "SCP02", Usage: "token symbol", EnvVars: []string{"TOKEN_SYMBOL"}},
+			&cli.StringFlag{Name: "token_owner", Value: "z1Jhn1rXBXWUvXbXhQaWOFMP3Swdq6STA36IPdQKo50", Usage: "token owner", EnvVars: []string{"TOKEN_OWNER"}},
 			&cli.StringFlag{Name: "port", Value: ":80", EnvVars: []string{"PORT"}},
 		},
 		Action: run,

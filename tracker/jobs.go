@@ -14,6 +14,12 @@ func (t *Tracker) runJobs() {
 	s.StartImmediately()
 	s.StartAsync()
 }
+func reverseIDs(ids []string) (rIDs []string) {
+	for i := len(ids) - 1; i >= 0; i-- {
+		rIDs = append(rIDs, ids[i])
+	}
+	return
+}
 
 func (t *Tracker) jobTxsPull() {
 
@@ -52,7 +58,7 @@ func (t *Tracker) jobTxsPull() {
 		return
 	}
 
-	newIds := ids[len(t.ids):]
+	newIds := reverseIDs(ids)
 
 	// process txs
 	txsCounts := 0
